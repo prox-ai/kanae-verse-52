@@ -81,7 +81,7 @@ export const Roadmap = () => {
             <motion.div
               key={phase.quarter}
               variants={itemVariants}
-              className="relative flex items-center mb-16 last:mb-0"
+              className="relative flex items-start mb-16 last:mb-0"
             >
               {/* Timeline line */}
               {index !== roadmapItems.length - 1 && (
@@ -112,8 +112,8 @@ export const Roadmap = () => {
                           viewport={{ once: true }}
                           className="flex items-start group"
                         >
-                          <span className="w-2 h-2 mt-2.5 mr-3 bg-kanae-secondary rounded-full group-hover:scale-150 transition-transform" />
-                          <span className="text-gray-600 group-hover:text-kanae-text transition-colors">
+                          <span className="flex-shrink-0 w-2 h-2 mt-2.5 mr-3 bg-kanae-secondary rounded-full group-hover:scale-150 transition-transform" />
+                          <span className="text-gray-600 group-hover:text-kanae-text transition-colors line-clamp-2 sm:line-clamp-1">
                             {item}
                           </span>
                         </motion.li>
