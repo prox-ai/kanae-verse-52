@@ -26,32 +26,8 @@ export const Roadmap = () => {
     },
   ];
 
-  const containerVariants = {
-    hidden: {},
-    visible: {
-      transition: {
-        staggerChildren: 0.2,
-      },
-    },
-  };
-
-  const itemVariants = {
-    hidden: {
-      opacity: 0,
-      y: 20,
-    },
-    visible: {
-      opacity: 1,
-      y: 0,
-      transition: {
-        duration: 0.6,
-      },
-    },
-  };
-
   return (
     <section className="py-20 relative overflow-hidden">
-      {/* Background decoration */}
       <div className="absolute inset-0 bg-gradient-to-b from-white via-kanae-primary/10 to-white" />
       
       <div className="container mx-auto px-4 relative">
@@ -70,61 +46,49 @@ export const Roadmap = () => {
           </h2>
         </motion.div>
 
-        <motion.div
-          variants={containerVariants}
-          initial="hidden"
-          whileInView="visible"
-          viewport={{ once: true }}
-          className="max-w-5xl mx-auto"
-        >
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
           {roadmapItems.map((phase, index) => (
             <motion.div
               key={phase.quarter}
-              variants={itemVariants}
-              className="relative flex items-start mb-16 last:mb-0"
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.6, delay: index * 0.2 }}
+              viewport={{ once: true }}
+              className="relative"
             >
-              {/* Timeline line */}
-              {index !== roadmapItems.length - 1 && (
-                <div className="absolute left-[2.5rem] top-[4rem] bottom-[-4rem] w-0.5 bg-gradient-to-b from-kanae-secondary/50 to-kanae-primary/50" />
-              )}
-
-              <div className="flex-1">
-                <div className="relative pl-20">
-                  {/* Quarter circle */}
-                  <div className="absolute left-0 top-0 w-12 h-12 rounded-full bg-gradient-to-br from-kanae-secondary to-kanae-primary flex items-center justify-center shadow-lg">
-                    <span className="text-white font-bold text-sm">
-                      {phase.quarter}
-                    </span>
-                  </div>
-
-                  {/* Content card */}
-                  <motion.div
-                    whileHover={{ scale: 1.02 }}
-                    className="bg-white p-8 rounded-2xl shadow-xl border border-kanae-primary/20 hover:border-kanae-secondary/40 transition-colors"
-                  >
-                    <ul className="space-y-4">
-                      {phase.items.map((item, itemIndex) => (
-                        <motion.li
-                          key={itemIndex}
-                          initial={{ opacity: 0, x: -20 }}
-                          whileInView={{ opacity: 1, x: 0 }}
-                          transition={{ delay: itemIndex * 0.2 }}
-                          viewport={{ once: true }}
-                          className="flex items-start group"
-                        >
-                          <span className="flex-shrink-0 w-2 h-2 mt-2.5 mr-3 bg-kanae-secondary rounded-full group-hover:scale-150 transition-transform" />
-                          <span className="text-gray-600 group-hover:text-kanae-text transition-colors line-clamp-2 sm:line-clamp-1">
-                            {item}
-                          </span>
-                        </motion.li>
-                      ))}
-                    </ul>
-                  </motion.div>
+              {/* Quarter Badge */}
+              <div className="absolute -top-4 left-1/2 transform -translate-x-1/2">
+                <div className="bg-gradient-to-r from-kanae-secondary to-kanae-primary text-white px-6 py-2 rounded-full shadow-lg">
+                  {phase.quarter}
                 </div>
               </div>
+
+              {/* Content Card */}
+              <motion.div
+                whileHover={{ scale: 1.02 }}
+                className="bg-white rounded-2xl shadow-xl p-8 pt-12 border border-kanae-primary/20 hover:border-kanae-secondary/40 transition-all duration-300"
+              >
+                <ul className="space-y-4">
+                  {phase.items.map((item, itemIndex) => (
+                    <motion.li
+                      key={itemIndex}
+                      initial={{ opacity: 0, x: -20 }}
+                      whileInView={{ opacity: 1, x: 0 }}
+                      transition={{ delay: itemIndex * 0.2 }}
+                      viewport={{ once: true }}
+                      className="flex items-start space-x-3 group"
+                    >
+                      <span className="flex-shrink-0 w-2 h-2 mt-2.5 bg-kanae-secondary rounded-full group-hover:scale-150 transition-transform" />
+                      <span className="text-gray-600 group-hover:text-kanae-text transition-colors">
+                        {item}
+                      </span>
+                    </motion.li>
+                  ))}
+                </ul>
+              </motion.div>
             </motion.div>
           ))}
-        </motion.div>
+        </div>
       </div>
     </section>
   );
