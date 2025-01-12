@@ -35,6 +35,9 @@ export const Navigation = () => {
               <a href="#music" className="text-gray-600 hover:text-kanae-secondary transition-colors">
                 Music
               </a>
+              <a href="#community" className="text-gray-600 hover:text-kanae-secondary transition-colors">
+                Community
+              </a>
             </div>
           </div>
           <button
