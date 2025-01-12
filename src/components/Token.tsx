@@ -1,4 +1,5 @@
 import { motion } from "framer-motion";
+import { PieChart, Pie, Cell, ResponsiveContainer, Legend, Tooltip } from "recharts";
 
 export const Token = () => {
   const tokenDetails = [
@@ -9,11 +10,11 @@ export const Token = () => {
   ];
 
   const allocation = [
-    { category: "Community & Ecosystem", percentage: 60 },
-    { category: "Marketing & Partnerships", percentage: 20 },
-    { category: "Liquidity & Reserves", percentage: 10 },
-    { category: "Team", percentage: 5 },
-    { category: "Advisors", percentage: 5 },
+    { name: "Community & Ecosystem", value: 60, color: "#FFD6E0" },
+    { name: "Marketing & Partnerships", value: 20, color: "#FF8FAB" },
+    { name: "Liquidity & Reserves", value: 10, color: "#FF69B4" },
+    { name: "Team", value: 5, color: "#FF1493" },
+    { name: "Advisors", value: 5, color: "#DB7093" },
   ];
 
   return (
@@ -24,7 +25,7 @@ export const Token = () => {
           whileInView={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6 }}
           viewport={{ once: true }}
-          className="max-w-4xl mx-auto"
+          className="max-w-6xl mx-auto"
         >
           <div className="text-center mb-12">
             <span className="inline-block px-4 py-1 mb-4 text-sm font-medium bg-kanae-primary rounded-full text-kanae-text">
@@ -51,32 +52,37 @@ export const Token = () => {
             ))}
           </div>
 
-          <div className="bg-white rounded-xl p-8 shadow-sm">
-            <h3 className="text-2xl font-bold mb-6 text-center">Token Allocation</h3>
-            <div className="space-y-4">
-              {allocation.map((item, index) => (
-                <motion.div
-                  key={item.category}
-                  initial={{ opacity: 0, x: -20 }}
-                  whileInView={{ opacity: 1, x: 0 }}
-                  transition={{ duration: 0.6, delay: index * 0.1 }}
-                  viewport={{ once: true }}
-                  className="relative"
-                >
-                  <div className="flex justify-between mb-1">
-                    <span className="text-sm font-medium text-gray-600">{item.category}</span>
-                    <span className="text-sm font-medium text-gray-900">{item.percentage}%</span>
-                  </div>
-                  <div className="w-full bg-gray-200 rounded-full h-2">
-                    <div
-                      className="bg-kanae-secondary rounded-full h-2"
-                      style={{ width: `${item.percentage}%` }}
-                    ></div>
-                  </div>
-                </motion.div>
-              ))}
+          <motion.div
+            initial={{ opacity: 0, scale: 0.95 }}
+            whileInView={{ opacity: 1, scale: 1 }}
+            transition={{ duration: 0.6 }}
+            viewport={{ once: true }}
+            className="bg-white rounded-xl p-8 shadow-sm"
+          >
+            <h3 className="text-2xl font-bold mb-8 text-center">Token Allocation</h3>
+            <div className="h-[400px]">
+              <ResponsiveContainer width="100%" height="100%">
+                <PieChart>
+                  <Pie
+                    data={allocation}
+                    cx="50%"
+                    cy="50%"
+                    labelLine={false}
+                    outerRadius={150}
+                    fill="#8884d8"
+                    dataKey="value"
+                    label={({ name, value }) => `${name} (${value}%)`}
+                  >
+                    {allocation.map((entry, index) => (
+                      <Cell key={`cell-${index}`} fill={entry.color} />
+                    ))}
+                  </Pie>
+                  <Tooltip />
+                  <Legend />
+                </PieChart>
+              </ResponsiveContainer>
             </div>
-          </div>
+          </motion.div>
         </motion.div>
       </div>
     </section>

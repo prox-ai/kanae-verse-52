@@ -4,10 +4,12 @@ import { Token } from "@/components/Token";
 import { Roadmap } from "@/components/Roadmap";
 import { Social } from "@/components/Social";
 import { Newsletter } from "@/components/Newsletter";
+import { Navigation } from "@/components/Navigation";
 
 const Index = () => {
   return (
-    <div className="min-h-screen bg-white">
+    <div className="min-h-screen bg-white pt-16">
+      <Navigation />
       <Hero />
       <About />
       <Token />

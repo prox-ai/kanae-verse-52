@@ -1,4 +1,5 @@
 import { motion } from "framer-motion";
+import { Milestone } from "lucide-react";
 
 export const Roadmap = () => {
   const roadmapItems = [
@@ -27,7 +28,7 @@ export const Roadmap = () => {
   ];
 
   return (
-    <section className="py-20 relative overflow-hidden">
+    <section id="roadmap" className="py-20 relative overflow-hidden">
       <div className="absolute inset-0 bg-gradient-to-b from-white via-kanae-primary/10 to-white" />
       
       <div className="container mx-auto px-4 relative">
@@ -46,48 +47,55 @@ export const Roadmap = () => {
           </h2>
         </motion.div>
 
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-          {roadmapItems.map((phase, index) => (
-            <motion.div
-              key={phase.quarter}
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.6, delay: index * 0.2 }}
-              viewport={{ once: true }}
-              className="relative"
-            >
-              {/* Quarter Badge */}
-              <div className="absolute -top-4 left-1/2 transform -translate-x-1/2">
-                <div className="bg-gradient-to-r from-kanae-secondary to-kanae-primary text-white px-6 py-2 rounded-full shadow-lg">
-                  {phase.quarter}
-                </div>
-              </div>
-
-              {/* Content Card */}
+        <div className="relative">
+          <div className="absolute left-1/2 transform -translate-x-1/2 h-full w-1 bg-gradient-to-b from-kanae-primary via-kanae-secondary to-kanae-primary/50" />
+          
+          <div className="space-y-24">
+            {roadmapItems.map((phase, index) => (
               <motion.div
-                whileHover={{ scale: 1.02 }}
-                className="bg-white rounded-2xl shadow-xl p-8 pt-12 border border-kanae-primary/20 hover:border-kanae-secondary/40 transition-all duration-300"
+                key={phase.quarter}
+                initial={{ opacity: 0, x: index % 2 === 0 ? -50 : 50 }}
+                whileInView={{ opacity: 1, x: 0 }}
+                transition={{ duration: 0.6, delay: index * 0.2 }}
+                viewport={{ once: true }}
+                className={`relative flex ${index % 2 === 0 ? 'justify-start' : 'justify-end'} items-center`}
               >
-                <ul className="space-y-4">
-                  {phase.items.map((item, itemIndex) => (
-                    <motion.li
-                      key={itemIndex}
-                      initial={{ opacity: 0, x: -20 }}
-                      whileInView={{ opacity: 1, x: 0 }}
-                      transition={{ delay: itemIndex * 0.2 }}
-                      viewport={{ once: true }}
-                      className="flex items-start space-x-3 group"
-                    >
-                      <span className="flex-shrink-0 w-2 h-2 mt-2.5 bg-kanae-secondary rounded-full group-hover:scale-150 transition-transform" />
-                      <span className="text-gray-600 group-hover:text-kanae-text transition-colors">
-                        {item}
-                      </span>
-                    </motion.li>
-                  ))}
-                </ul>
+                <div className={`w-5/12 ${index % 2 === 0 ? 'pr-12' : 'pl-12'}`}>
+                  <div className="absolute top-0 left-1/2 transform -translate-x-1/2">
+                    <div className="w-12 h-12 bg-white rounded-full border-4 border-kanae-secondary flex items-center justify-center">
+                      <Milestone className="w-6 h-6 text-kanae-secondary" />
+                    </div>
+                  </div>
+                  
+                  <motion.div
+                    whileHover={{ scale: 1.02 }}
+                    className="bg-white rounded-2xl shadow-xl p-8 border border-kanae-primary/20 hover:border-kanae-secondary/40 transition-all duration-300"
+                  >
+                    <div className="text-xl font-bold text-kanae-secondary mb-4">
+                      {phase.quarter}
+                    </div>
+                    <ul className="space-y-3">
+                      {phase.items.map((item, itemIndex) => (
+                        <motion.li
+                          key={itemIndex}
+                          initial={{ opacity: 0, x: -20 }}
+                          whileInView={{ opacity: 1, x: 0 }}
+                          transition={{ delay: itemIndex * 0.2 }}
+                          viewport={{ once: true }}
+                          className="flex items-start space-x-3 group"
+                        >
+                          <span className="flex-shrink-0 w-1.5 h-1.5 mt-2.5 bg-kanae-secondary rounded-full group-hover:scale-150 transition-transform" />
+                          <span className="text-gray-600 group-hover:text-kanae-text transition-colors">
+                            {item}
+                          </span>
+                        </motion.li>
+                      ))}
+                    </ul>
+                  </motion.div>
+                </div>
               </motion.div>
-            </motion.div>
-          ))}
+            ))}
+          </div>
         </div>
       </div>
     </section>
