@@ -5,38 +5,38 @@ import { Checkbox } from "./ui/checkbox";
 export const Roadmap = () => {
   const roadmapItems = [
     {
-      quarter: "Q1 2024",
-      items: [
-        { text: "Kanae Launch", isLaunched: true },
-        { text: "Launch Telegram Chatbot with KNE token integration", isLaunched: false },
-        { text: "X Agent Account activation", isLaunched: false },
-      ],
-    },
-    {
-      quarter: "Q2 2024",
-      items: [
-        { text: "Vtuber Persona debut with live-streaming", isLaunched: false },
-      ],
-    },
-    {
-      quarter: "Q3 2024",
-      items: [
-        { text: "Release first music single", isLaunched: false },
-        { text: "Launch digital photo collection as NFTs", isLaunched: false },
-      ],
-    },
-    {
-      quarter: "Q4 2024",
-      items: [
-        { text: "Release full music album", isLaunched: false },
-        { text: "Launch interactive game with KNE integration", isLaunched: false },
-      ],
-    },
-    {
-      quarter: "2025",
+      quarter: "Q1 2025",
       items: [
         { text: "Global expansion and partnerships", isLaunched: false },
         { text: "Advanced AI features integration", isLaunched: false },
+      ],
+    },
+    {
+      quarter: "Q2 2025",
+      items: [
+        { text: "Metaverse integration", isLaunched: false },
+        { text: "Cross-chain expansion", isLaunched: false },
+      ],
+    },
+    {
+      quarter: "Q3 2025",
+      items: [
+        { text: "Mobile app launch", isLaunched: false },
+        { text: "Community governance implementation", isLaunched: false },
+      ],
+    },
+    {
+      quarter: "Q4 2025",
+      items: [
+        { text: "Global marketing campaign", isLaunched: false },
+        { text: "Strategic partnerships expansion", isLaunched: false },
+      ],
+    },
+    {
+      quarter: "2026",
+      items: [
+        { text: "Web3 gaming platform", isLaunched: false },
+        { text: "Ecosystem expansion", isLaunched: false },
       ],
     },
   ];
