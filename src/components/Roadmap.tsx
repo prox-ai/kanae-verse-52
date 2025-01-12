@@ -1,28 +1,42 @@
 import { motion } from "framer-motion";
-import { Milestone } from "lucide-react";
+import { Milestone, Check } from "lucide-react";
+import { Checkbox } from "./ui/checkbox";
 
 export const Roadmap = () => {
   const roadmapItems = [
     {
-      quarter: "Q1 + Q2",
+      quarter: "Q1 2024",
       items: [
-        "Launch Telegram Chatbot with KNE token integration",
-        "X Agent Account activation",
-        "Vtuber Persona debut with live-streaming",
+        { text: "Kanae Launch", isLaunched: true },
+        { text: "Launch Telegram Chatbot with KNE token integration", isLaunched: false },
+        { text: "X Agent Account activation", isLaunched: false },
       ],
     },
     {
-      quarter: "Q3",
+      quarter: "Q2 2024",
       items: [
-        "Release first music single",
-        "Launch digital photo collection as NFTs",
+        { text: "Vtuber Persona debut with live-streaming", isLaunched: false },
       ],
     },
     {
-      quarter: "Q4",
+      quarter: "Q3 2024",
       items: [
-        "Release full music album",
-        "Launch interactive game with KNE integration",
+        { text: "Release first music single", isLaunched: false },
+        { text: "Launch digital photo collection as NFTs", isLaunched: false },
+      ],
+    },
+    {
+      quarter: "Q4 2024",
+      items: [
+        { text: "Release full music album", isLaunched: false },
+        { text: "Launch interactive game with KNE integration", isLaunched: false },
+      ],
+    },
+    {
+      quarter: "2025",
+      items: [
+        { text: "Global expansion and partnerships", isLaunched: false },
+        { text: "Advanced AI features integration", isLaunched: false },
       ],
     },
   ];
@@ -50,7 +64,7 @@ export const Roadmap = () => {
         <div className="relative">
           <div className="absolute left-1/2 transform -translate-x-1/2 h-full w-1 bg-gradient-to-b from-kanae-primary via-kanae-secondary to-kanae-primary/50" />
           
-          <div className="space-y-24">
+          <div className="space-y-16">
             {roadmapItems.map((phase, index) => (
               <motion.div
                 key={phase.quarter}
@@ -74,7 +88,7 @@ export const Roadmap = () => {
                     <div className="text-xl font-bold text-kanae-secondary mb-4">
                       {phase.quarter}
                     </div>
-                    <ul className="space-y-3">
+                    <ul className="space-y-4">
                       {phase.items.map((item, itemIndex) => (
                         <motion.li
                           key={itemIndex}
@@ -84,10 +98,18 @@ export const Roadmap = () => {
                           viewport={{ once: true }}
                           className="flex items-start space-x-3 group"
                         >
-                          <span className="flex-shrink-0 w-1.5 h-1.5 mt-2.5 bg-kanae-secondary rounded-full group-hover:scale-150 transition-transform" />
-                          <span className="text-gray-600 group-hover:text-kanae-text transition-colors">
-                            {item}
-                          </span>
+                          <div className="flex items-center space-x-2">
+                            <Checkbox 
+                              checked={item.isLaunched}
+                              className="data-[state=checked]:bg-kanae-secondary data-[state=checked]:border-kanae-secondary"
+                              disabled
+                            />
+                            <span className={`text-gray-600 group-hover:text-kanae-text transition-colors ${
+                              item.isLaunched ? 'line-through text-kanae-secondary' : ''
+                            }`}>
+                              {item.text}
+                            </span>
+                          </div>
                         </motion.li>
                       ))}
                     </ul>
