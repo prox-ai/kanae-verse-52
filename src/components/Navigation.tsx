@@ -1,6 +1,14 @@
 import { motion } from "framer-motion";
-import { Copy } from "lucide-react";
-import { useToast } from "./ui/use-toast";
+import { Copy, ChevronDown } from "lucide-react";
+import { useToast } from "@/hooks/use-toast";
+import {
+  NavigationMenu,
+  NavigationMenuContent,
+  NavigationMenuItem,
+  NavigationMenuLink,
+  NavigationMenuList,
+  NavigationMenuTrigger,
+} from "@/components/ui/navigation-menu";
 
 export const Navigation = () => {
   const { toast } = useToast();
@@ -11,6 +19,13 @@ export const Navigation = () => {
     toast({
       title: "Copied!",
       description: "Contract address copied to clipboard",
+    });
+  };
+
+  const handleFeaturesClick = () => {
+    toast({
+      title: "Coming Soon",
+      description: "These features are currently in development",
     });
   };
 
@@ -29,15 +44,50 @@ export const Navigation = () => {
               <a href="#roadmap" className="text-gray-600 hover:text-kanae-secondary transition-colors">
                 Roadmap
               </a>
-              <a href="#album" className="text-gray-600 hover:text-kanae-secondary transition-colors">
-                Album
-              </a>
-              <a href="#music" className="text-gray-600 hover:text-kanae-secondary transition-colors">
-                Music
-              </a>
               <a href="#community" className="text-gray-600 hover:text-kanae-secondary transition-colors">
                 Community
               </a>
+              <NavigationMenu>
+                <NavigationMenuList>
+                  <NavigationMenuItem>
+                    <NavigationMenuTrigger onClick={handleFeaturesClick} className="text-gray-600 hover:text-kanae-secondary transition-colors">
+                      Features
+                    </NavigationMenuTrigger>
+                    <NavigationMenuContent>
+                      <ul className="grid w-[200px] gap-3 p-4">
+                        <li>
+                          <NavigationMenuLink asChild>
+                            <a href="#brain-terminal" className="block p-2 hover:bg-gray-100 rounded-md">
+                              Brain Terminal
+                            </a>
+                          </NavigationMenuLink>
+                        </li>
+                        <li>
+                          <NavigationMenuLink asChild>
+                            <a href="#livestream" className="block p-2 hover:bg-gray-100 rounded-md">
+                              Livestream
+                            </a>
+                          </NavigationMenuLink>
+                        </li>
+                        <li>
+                          <NavigationMenuLink asChild>
+                            <a href="#album" className="block p-2 hover:bg-gray-100 rounded-md">
+                              Album
+                            </a>
+                          </NavigationMenuLink>
+                        </li>
+                        <li>
+                          <NavigationMenuLink asChild>
+                            <a href="#music" className="block p-2 hover:bg-gray-100 rounded-md">
+                              Music
+                            </a>
+                          </NavigationMenuLink>
+                        </li>
+                      </ul>
+                    </NavigationMenuContent>
+                  </NavigationMenuItem>
+                </NavigationMenuList>
+              </NavigationMenu>
             </div>
           </div>
           <button
