@@ -1,5 +1,5 @@
 import { motion } from "framer-motion";
-import { Copy, ChevronDown } from "lucide-react";
+import { Copy, ChevronDown, Tv } from "lucide-react";
 import { useToast } from "@/hooks/use-toast";
 import {
   NavigationMenu,
@@ -46,6 +46,10 @@ export const Navigation = () => {
               </a>
               <a href="#community" className="text-gray-600 hover:text-kanae-secondary transition-colors">
                 Community
+              </a>
+              <a href="#livestream" className="text-gray-600 hover:text-kanae-secondary transition-colors flex items-center gap-1">
+                <Tv className="h-4 w-4" />
+                Livestream
               </a>
               <NavigationMenu>
                 <NavigationMenuList>
