@@ -1,6 +1,5 @@
-import { motion } from "framer-motion";
-import { Milestone, Check } from "lucide-react";
-import { Checkbox } from "./ui/checkbox";
+import React from "react";
+import { Check } from "lucide-react";
 
 export const Roadmap = () => {
   const roadmapItems = [
@@ -9,6 +8,7 @@ export const Roadmap = () => {
       items: [
         { text: "Global expansion and partnerships", isLaunched: false },
         { text: "Advanced AI features integration", isLaunched: false },
+        { text: "Livestream Session #1", isLaunched: true, link: "https://www.youtube.com/live/zgXS0PeY_XA" },
       ],
     },
     {
@@ -42,82 +42,56 @@ export const Roadmap = () => {
   ];
 
   return (
-    <section id="roadmap" className="py-20 relative overflow-hidden">
-      <div className="absolute inset-0 bg-gradient-to-b from-white via-kanae-primary/10 to-white" />
-      
-      <div className="container mx-auto px-4 relative">
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6 }}
-          viewport={{ once: true }}
-          className="text-center mb-16"
-        >
-          <span className="inline-block px-6 py-2 mb-4 text-sm font-medium bg-kanae-primary rounded-full text-kanae-text">
-            Roadmap
-          </span>
-          <h2 className="text-4xl md:text-5xl font-bold mb-6 text-kanae-text bg-clip-text text-transparent bg-gradient-to-r from-kanae-secondary to-kanae-primary">
-            Our Journey Ahead
-          </h2>
-        </motion.div>
-
-        <div className="relative">
-          <div className="absolute left-1/2 transform -translate-x-1/2 h-full w-1 bg-gradient-to-b from-kanae-primary via-kanae-secondary to-kanae-primary/50" />
-          
-          <div className="space-y-16">
-            {roadmapItems.map((phase, index) => (
-              <motion.div
-                key={phase.quarter}
-                initial={{ opacity: 0, x: index % 2 === 0 ? -50 : 50 }}
-                whileInView={{ opacity: 1, x: 0 }}
-                transition={{ duration: 0.6, delay: index * 0.2 }}
-                viewport={{ once: true }}
-                className={`relative flex ${index % 2 === 0 ? 'justify-start' : 'justify-end'} items-center`}
-              >
-                <div className={`w-5/12 ${index % 2 === 0 ? 'pr-12' : 'pl-12'}`}>
-                  <div className="absolute top-0 left-1/2 transform -translate-x-1/2">
-                    <div className="w-12 h-12 bg-white rounded-full border-4 border-kanae-secondary flex items-center justify-center">
-                      <Milestone className="w-6 h-6 text-kanae-secondary" />
-                    </div>
-                  </div>
-                  
-                  <motion.div
-                    whileHover={{ scale: 1.02 }}
-                    className="bg-white rounded-2xl shadow-xl p-8 border border-kanae-primary/20 hover:border-kanae-secondary/40 transition-all duration-300"
+    <section id="roadmap" className="py-16 bg-white">
+      <div className="container mx-auto px-4">
+        <h2 className="text-3xl font-bold text-center mb-12">Roadmap</h2>
+        <div className="grid gap-8 md:grid-cols-2 lg:grid-cols-3">
+          {roadmapItems.map((phase, index) => (
+            <div
+              key={index}
+              className="bg-white p-6 rounded-lg shadow-lg border border-gray-200"
+            >
+              <h3 className="text-xl font-semibold mb-4">{phase.quarter}</h3>
+              <ul className="space-y-3">
+                {phase.items.map((item, itemIndex) => (
+                  <li
+                    key={itemIndex}
+                    className={`flex items-center space-x-2 ${
+                      item.isLaunched ? "text-gray-500 line-through" : ""
+                    }`}
                   >
-                    <div className="text-xl font-bold text-kanae-secondary mb-4">
-                      {phase.quarter}
+                    <div className="flex-shrink-0">
+                      <div
+                        className={`w-5 h-5 rounded-full border ${
+                          item.isLaunched
+                            ? "bg-green-500 border-green-500"
+                            : "border-gray-300"
+                        } flex items-center justify-center`}
+                      >
+                        {item.isLaunched && (
+                          <Check className="h-3 w-3 text-white" />
+                        )}
+                      </div>
                     </div>
-                    <ul className="space-y-4">
-                      {phase.items.map((item, itemIndex) => (
-                        <motion.li
-                          key={itemIndex}
-                          initial={{ opacity: 0, x: -20 }}
-                          whileInView={{ opacity: 1, x: 0 }}
-                          transition={{ delay: itemIndex * 0.2 }}
-                          viewport={{ once: true }}
-                          className="flex items-start space-x-3 group"
+                    <span className="flex-1">
+                      {item.link ? (
+                        <a
+                          href={item.link}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          className="text-blue-500 hover:text-blue-700 underline"
                         >
-                          <div className="flex items-center space-x-2">
-                            <Checkbox 
-                              checked={item.isLaunched}
-                              className="data-[state=checked]:bg-kanae-secondary data-[state=checked]:border-kanae-secondary"
-                              disabled
-                            />
-                            <span className={`text-gray-600 group-hover:text-kanae-text transition-colors ${
-                              item.isLaunched ? 'line-through text-kanae-secondary' : ''
-                            }`}>
-                              {item.text}
-                            </span>
-                          </div>
-                        </motion.li>
-                      ))}
-                    </ul>
-                  </motion.div>
-                </div>
-              </motion.div>
-            ))}
-          </div>
+                          {item.text}
+                        </a>
+                      ) : (
+                        item.text
+                      )}
+                    </span>
+                  </li>
+                ))}
+              </ul>
+            </div>
+          ))}
         </div>
       </div>
     </section>
